@@ -5,6 +5,7 @@ import {
   Platform,
   StyleSheet,
   View,
+  KeyboardAvoidingView,
   StyleProp,
   ViewStyle,
   SafeAreaView,
@@ -635,19 +636,21 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
     const AnimatedView = this.props.isAnimated === true ? Animated.View : View
 
     return (
-      <AnimatedView
-        style={{
-          height: this.state.messagesContainerHeight,
-        }}
-      >
-        <MessageContainer
-          {...this.props}
-          invertibleScrollViewProps={this.invertibleScrollViewProps}
-          messages={this.getMessages()}
-          forwardRef={this._messageContainerRef}
-        />
-        {this.renderChatFooter()}
-      </AnimatedView>
+      <KeyboardAvoidingView enabled>
+        <AnimatedView
+          style={{
+            height: this.state.messagesContainerHeight,
+          }}
+        >
+          <MessageContainer
+            {...this.props}
+            invertibleScrollViewProps={this.invertibleScrollViewProps}
+            messages={this.getMessages()}
+            forwardRef={this._messageContainerRef}
+          />
+          {this.renderChatFooter()}
+        </AnimatedView>
+      </KeyboardAvoidingView>
     )
   }
 
